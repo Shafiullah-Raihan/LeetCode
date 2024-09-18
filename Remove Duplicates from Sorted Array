@@ -1,0 +1,81 @@
+///https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150
+///Remove Duplicates from Sorted Array using two pointer
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+typedef vector<vector<int>> vvi;
+
+#define fore(i,a,b) for(int i=a;i<=b;i++)
+#define forl(i,a,b) for(int i=a;i<b;i++)
+#define nl cout<<endl
+#define F first
+#define S second
+#define pb push_back
+#define mp make_pair
+#define endl "\n"
+#define ll long long
+#define bismillah ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+int removeDuplicate(vi &nums)
+{
+    int n = nums.size();
+    int left=1,right;
+    forl(right,1,n){
+        if(nums[right]!= nums[left-1]){
+            //nums[left] = nums[right];
+            swap(nums[left] ,nums[right]);
+            left++;
+        }
+    }
+    return left;
+}
+
+int main() {
+    bismillah;
+    vi nums = {0,0,1,1,1,2,2,3,3,4};
+    vi original = nums;
+    int sz = removeDuplicate(nums);
+    for(auto u:original){
+        cout<< u<< " ";
+    }
+    nl;
+    forl(i,0,sz)
+    {
+        cout<< nums[i]<< " ";
+    }
+
+
+
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
