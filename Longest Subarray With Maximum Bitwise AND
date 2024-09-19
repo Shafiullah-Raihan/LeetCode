@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int mx =0,sum =0,cnt=0;
+
+     
+        int mxNums = max_element(nums.begin(),nums.end()) - nums.begin();
+        int num = nums[mxNums];
+
+        for(int i=mxNums;i<nums.size();i++){
+            if(nums[i]==num){
+                cnt++;
+                mx = max(cnt,mx);
+            }
+            else{
+                cnt=0;
+            }
+
+        }
+        return mx;
+
+    }
+};
