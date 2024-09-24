@@ -1,0 +1,26 @@
+///https://leetcode.com/problems/is-subsequence/description/?envType=problem-list-v2&envId=dynamic-programming&difficulty=EASY
+
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int i=0,j=0;
+        while(i<t.size()){
+            if(s[j]== t[i]){
+                i++,j++;
+                if(j==s.size()){
+                    return true;
+                }
+            }
+            else{
+                i++;
+            }
+        }
+        if(j!=s.size()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+};
