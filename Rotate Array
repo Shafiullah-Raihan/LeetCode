@@ -1,0 +1,13 @@
+///https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        vector<int>newVec(nums.size());
+        for(int i=0;i<nums.size();i++){
+            newVec[(i+k)%nums.size()] = nums[i];
+        }
+        nums=newVec;
+    }
+};
