@@ -1,0 +1,20 @@
+///https://leetcode.com/problems/length-of-last-word/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int len= s.length()-1;
+        int wordCount = 0;
+        int i= len;
+        while(i>=0 && s[i] == ' '){
+            i--;
+        }
+        while(i>=0 && s[i]!= ' '){
+            wordCount++;
+            i--;
+
+        }
+        return wordCount;
+    }
+};
