@@ -11,14 +11,14 @@ public:
         for(int i=0;i<len;i++){
             char charS = s[i],charT = t[i];
 
-            if(mp1.find(charS)!=mp1.end()){
+            if(mp1.find(charS)!=mp1.end()){     ///first e oi letter pai kina paile loop e dhukbe
                 auto it = *mp1.find(charS);
-                if(it.second!=charT){
+                if(it.second!=charT){            /// but oitar shate map e second letter ta mile nai.Onno ekta letter milche. jemon egg => adc
                     return false;
                 }
             }
             else{
-                if(mp2.find(charT)!= mp2.end()){
+                if(mp2.find(charT)!= mp2.end()){              /// ekhon check korbo je letter map korar kotha tar true kina mane age paichilam kina.Jodi pai oi letter ache but map hoi nai 😁
                     return false;
                 }
 
