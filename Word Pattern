@@ -1,0 +1,44 @@
+///https://leetcode.com/problems/word-pattern/description/?source=submission-ac
+
+
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        string word;
+        stringstream ss(s);
+        vector<string>str;
+        while(ss>>word)
+        {
+            str.push_back(word);
+        }
+        unordered_map<string,char>sc;
+        unordered_map<char,string>cs;
+        if(pattern.size() != str.size()) return false;
+
+        for(int i=0;i<str.size();i++)
+        {
+            char c = pattern[i];
+            string s = str[i];
+            if(cs.find(c) != cs.end())
+            {
+                if(cs[c] != s)
+                {
+                    return false;
+                }
+            }
+            else{
+                cs[c] = s;
+            }
+
+            if(sc.find(s) != sc.end())
+            {
+                if(sc[s] != c) return false;
+            }
+            else{
+                sc[s] = c;
+            }
+
+        }
+        return true;
+    }
+};
