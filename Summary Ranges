@@ -1,0 +1,34 @@
+///https://leetcode.com/problems/summary-ranges/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> str;
+        if(nums.size() == 0) return str;
+        long long start =nums[0],last = nums[0]; 
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i] - last == 1)
+            {
+                last = nums[i];
+            }
+            else{
+                string temp = to_string (start);
+                if(start != last){
+                    temp += "->" + to_string(last);
+                }
+                str.push_back(temp);
+                start = nums[i];
+                last = nums[i];
+                
+            }
+        }
+            string temp = to_string (start);
+            if(start != last){
+                temp += "->" + to_string(last);
+            }
+            str.push_back(temp);
+        return str;
+    }
+};
