@@ -1,0 +1,35 @@
+///https://leetcode.com/problems/simplify-path/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    string simplifyPath(string path) {
+        stack<string>st;
+        string dir;
+        stringstream ss(path);
+
+        while(getline(ss,dir,'/'))
+        {
+
+            if(dir== "" || dir == ".") continue;
+            else if(dir == ".."){
+                if(!st.empty()){
+                    st.pop();
+                }
+            }
+            else{
+                st.push(dir);
+            }
+        }
+        string result = "";
+
+        if(st.empty()) return "/";
+        while(!st.empty()){
+            result = "/" + st.top() + result;
+            st.pop();
+        }
+
+        return result;
+
+    }
+};
