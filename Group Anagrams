@@ -1,0 +1,25 @@
+///https://leetcode.com/problems/group-anagrams/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> ans;
+        unordered_map<string,vector<string>>mp;
+        for(auto u:strs){
+            string srtstring = u;
+            sort(srtstring.begin(),srtstring.end());
+
+            mp[srtstring].push_back(u);
+
+
+
+
+        }
+        for(auto u:mp){
+
+            ans.push_back(u.second);
+        }
+        return ans;
+    }
+};
