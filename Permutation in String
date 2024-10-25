@@ -1,0 +1,36 @@
+////https://leetcode.com/problems/permutation-in-string/description/?envType=daily-question&envId=2024-10-05
+
+
+
+class Solution {
+    public:
+        bool checkInclusion(string s1, string s2) {
+            
+            if(s1.length()>s2.length()) return false;
+
+            unordered_map<char,int>mp1;
+            for(char u:s1){
+                mp1[u]++;
+            }
+
+            for(int i=0;i<=(s2.length()-s1.length());i++){
+                unordered_map<char,int> mp2;
+                for(int j=0;j<s1.length();j++){
+                    mp2[s2[i+j]]++;
+                }
+                if(match(mp1,mp2)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        bool match(unordered_map<char,int>& mp1, unordered_map<char,int>& mp2){
+                for (const auto& [key, value] : mp1) {
+                if (mp2[key] != value)
+                    return false;
+            }
+            return true;
+        }
+};
