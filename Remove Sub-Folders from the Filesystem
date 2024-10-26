@@ -1,0 +1,26 @@
+///https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/?envType=daily-question&envId=2024-10-25
+
+
+class Solution {
+public:
+    vector<string> removeSubfolders(vector<string>& folder) {
+        
+        sort(folder.begin(),folder.end());
+        vector<string> answer;
+        answer.push_back(folder[0]);
+        for(int i=1;i<folder.size();i++){
+            string last = answer.back();
+            last += '/';
+            if(folder[i].compare(0,last.size(),last) !=0){
+                answer.push_back(folder[i]);
+            }
+        }
+
+        return answer;
+
+
+
+
+
+    }
+};
