@@ -1,0 +1,54 @@
+///https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
+
+const int mx = 1e5+123;
+long long dist[mx];
+vector<pair<int,int>>adj[mx];
+long long inf = 1e15;
+void dijkstra(int src,int n,int k){
+    for(int i=0;i<=n;i++) dist[i] = inf;
+
+    priority_queue<vector<long long>, vector<vector<long long>>,greater<vector<long long>>> pq;
+
+    dist[src] =0;
+
+    pq.push({0,0,src});
+
+    while(!pq.empty()){
+        int stops = pq.top()[0];
+        int curD = pq.top()[1];
+        int node = pq.top()[2];
+        pq.pop();
+
+        for(auto u : adj[node]){
+            if(curD + u.second < dist[u.first] && stops <= k){
+                dist[u.first] = curD + u.second;
+                pq.push({stops+1,dist[u.first],u.first});
+            }
+        }
+    }
+
+}
+
+
+
+
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+
+        for(int i=0;i<=n;i++) adj[i].clear();
+
+        for(auto fl : flights){
+            adj[fl[0]].push_back({fl[1],fl[2]});
+
+        }
+
+        dijkstra(src,n,k);
+        if(dist[dst] == inf){
+            dist[dst] = -1;
+        }
+        return dist[dst];
+
+    }
+};
