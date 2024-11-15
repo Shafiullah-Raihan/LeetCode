@@ -1,0 +1,21 @@
+///https://leetcode.com/problems/find-the-difference/description/?envType=problem-list-v2&envId=hash-table
+
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        map<char,int>mp;
+        for(auto u:t){
+            mp[u]++;
+        }
+        for(auto u:s){
+            mp[u]--;
+        }
+        for(auto u:mp){
+            if(u.second == 1){
+                return u.first;
+            }
+        }
+        return {};
+    }
+};
