@@ -1,0 +1,15 @@
+///https://leetcode.com/problems/single-number-ii/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int one=0,two=0;
+        for(auto u:nums)
+        {
+            one = one ^ u & ~two;
+            two = two ^ u & ~one;
+        }
+        return one;
+    }
+};
