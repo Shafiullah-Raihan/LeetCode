@@ -1,0 +1,23 @@
+///https://leetcode.com/problems/check-if-n-and-its-double-exist/description/?envType=daily-question&envId=2024-12-01
+
+
+class Solution {
+public:
+    bool checkIfExist(vector<int>& arr) {
+        unordered_map<int,int>mp;
+        for(auto u:arr){
+            mp[u]++;
+        }
+        for(auto u:arr){
+            if(u != 0 && mp.find(2*u) != mp.end()){
+                return true;
+            }
+            if(u ==0 && mp[0]>1){
+                return true;
+            }
+
+        }
+        return false;
+        
+    }
+};
