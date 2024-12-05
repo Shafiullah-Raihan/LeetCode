@@ -1,0 +1,32 @@
+///https://leetcode.com/problems/identify-the-largest-outlier-in-an-array/description/
+
+
+class Solution {
+public:
+    int getLargestOutlier(vector<int>& nums) {
+        long long totalSum = 0;
+    for (int num : nums) {
+        totalSum += num;
+    }
+
+    int largestOutlier = INT_MIN;
+    unordered_map<int, int> freq;
+
+    for (int num : nums) {
+        freq[num]++;
+    }
+
+    for (int x : nums) {
+        long long outlier = totalSum - 2LL * x;
+
+        if (freq[outlier] > 0) {
+            if (outlier != x || freq[x] > 1) {
+                largestOutlier = max(largestOutlier, (int)outlier);
+            }
+        }
+    }
+
+    return largestOutlier;
+    }
+};
+
