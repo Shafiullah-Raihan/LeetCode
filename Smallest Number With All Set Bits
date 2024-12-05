@@ -1,0 +1,26 @@
+///https://leetcode.com/problems/smallest-number-with-all-set-bits/description/
+
+
+class Solution {
+public:
+    int smallestNumber(int n) {
+         while (true) {
+        int temp = n;
+        bool allSet = true;
+        
+        while (temp > 0) {
+            if ((temp & 1) == 0) { 
+                allSet = false;
+                break;
+            }
+            temp >>= 1; 
+        }
+        
+        if (allSet) {
+            return n; 
+        }
+        
+        n++;
+    }
+    }
+};
