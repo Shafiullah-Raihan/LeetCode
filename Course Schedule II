@@ -1,0 +1,46 @@
+///https://leetcode.com/problems/course-schedule-ii/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+      
+        vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
+
+        for(auto u:prerequisites){
+            adj[u[1]].push_back(u[0]);
+            indegree[u[0]]++;
+        }
+        vector<int> ans;
+
+        queue<int>q;
+        for(int i=0;i<numCourses;i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int frnt = q.front();
+            q.pop();
+            ans.push_back(frnt);
+
+            for(auto u:adj[frnt]){
+                indegree[u]--;
+                if(indegree[u] == 0){
+                    q.push(u);
+                }
+            }
+
+        }
+        if(ans.size() == numCourses){
+            return ans;
+        }
+        else{
+            return {};
+        }
+        
+    }
+};
+
+
