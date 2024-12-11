@@ -1,0 +1,24 @@
+///https://leetcode.com/problems/delete-and-earn/description/?envType=study-plan-v2&envId=dynamic-programming
+
+
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+        int N = 1e4 + 1; 
+        vector<int> freq(N, 0);
+
+        for (int num : nums) {
+            freq[num] += num;
+        }
+
+        int prev1 = 0, prev2 = 0; 
+
+        for (int i = 1; i < N; i++) {
+            int current = max(prev1, prev2 + freq[i]);
+            prev2 = prev1;
+            prev1 = current;
+        }
+
+        return prev1;
+    }
+};
