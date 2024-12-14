@@ -1,0 +1,19 @@
+///https://leetcode.com/problems/maximum-length-of-pair-chain/description/?envType=study-plan-v2&envId=dynamic-programming
+
+
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(),pairs.end(),[](vector<int> a, vector<int> b){
+            return a[1]<b[1];
+        });
+        int current = INT_MIN,ans =0;
+        for(auto u:pairs){
+            if(u[0]>current){
+                current = u[1];
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
