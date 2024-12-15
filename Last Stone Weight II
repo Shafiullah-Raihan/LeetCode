@@ -1,0 +1,17 @@
+///https://leetcode.com/problems/last-stone-weight-ii/description/
+
+class Solution {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        int sum = accumulate(stones.begin(),stones.end(),0);
+        int target = sum/2;
+
+        vector<int>dp(target+1,0);
+        for(auto u:stones){
+            for(int j=target;j>=u;j--){
+                dp[j] = max(dp[j], dp[j-u]+u);
+            }
+        }
+        return sum - 2*dp[target];
+    }
+};
