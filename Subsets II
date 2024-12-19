@@ -1,0 +1,27 @@
+///https://leetcode.com/problems/subsets-ii/description/
+
+class Solution {
+public:
+
+    void backTrack(vector<int>& nums,vector<int>& stateAnswer,vector<vector<int>>& ans,int start)
+    {
+        ans.push_back(stateAnswer);
+        for(int i=start;i<nums.size();i++)
+        {
+            if(i != start && nums[i] == nums[i-1]) continue;
+            stateAnswer.push_back(nums[i]);
+            backTrack(nums,stateAnswer,ans,i+1);
+            stateAnswer.pop_back();
+        }
+    }
+
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans;
+        vector<int> stateAnswer;
+        backTrack(nums,stateAnswer,ans,0);
+        return ans;
+    }
+};
+
