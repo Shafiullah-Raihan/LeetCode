@@ -1,0 +1,18 @@
+///https://leetcode.com/problems/combination-sum-iv/description/
+
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<unsigned int>dp(target+1,0);
+        dp[0] =1;
+        for(int i=1;i<=target;i++)
+        {
+            for(auto u:nums){
+                if(i >= u){
+                    dp[i]+= dp[i-u];
+                }
+            }
+        }
+        return dp[target];
+    }
+};
