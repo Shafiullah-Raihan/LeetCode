@@ -1,0 +1,22 @@
+///https://leetcode.com/problems/minimum-cost-for-tickets/?envType=daily-question&envId=2024-12-31
+
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        int last = days[days.size()-1];
+        vector<int>dp(last+1,0);
+        int inc=0;
+        for(int i=1;i<=last;i++)
+        {
+            if(i<days[inc]){
+                dp[i] = dp[i-1];
+            }
+            else{
+                inc++;
+                dp[i] = min({dp[i - 1] + costs[0],dp[max(0, i - 7)] + costs[1],dp[max(0, i - 30)] + costs[2]});
+            }
+            
+        }
+        return dp[last];
+    }
+};
