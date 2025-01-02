@@ -1,0 +1,16 @@
+///https://leetcode.com/problems/sqrtx/description/
+class Solution {
+public:
+    int mySqrt(int n) {
+    double left = 0, right = n, mid = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        mid = (left + right) / 2;
+        if (mid * mid > n)
+            right = mid;
+        else if (mid * mid <= n)
+            left = mid;
+    }
+    return mid;
+    }
+};
