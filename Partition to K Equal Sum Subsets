@@ -1,0 +1,40 @@
+///https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
+
+class Solution {
+public:
+    int dp[1<<16][16],target;
+    bool solve(vector<int>& nums,int sum,int mask,int k)
+    {
+        if(k==1) return true;
+        if(sum == 0)
+        {
+            return solve(nums,target,mask,k-1);
+        }
+        
+
+        if(dp[mask][k] != -1){
+            return dp[mask][k];
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(!(mask & (1<<i)) && sum >= nums[i]){
+                if(solve(nums,sum-nums[i],mask | (1<<i),k))
+                {
+                    return dp[mask][k] = true;
+                }
+            }
+        }
+        return dp[mask][k] = false;
+
+
+    }
+    bool canPartitionKSubsets(vector<int>& nums, int k) {
+        memset(dp,-1,sizeof(dp));
+        target = accumulate(nums.begin(),nums.end(),0);
+        if(target % k != 0) return false;
+        target/=k;
+        if(*max_element(nums.begin(),nums.end())>target) return false;
+        int sum = target;
+        return solve(nums,sum,0,k);
+    }
+};
