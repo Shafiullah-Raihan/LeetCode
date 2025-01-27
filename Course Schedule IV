@@ -1,0 +1,28 @@
+///https://leetcode.com/problems/course-schedule-iv/?envType=daily-question&envId=2025-01-27
+///Floyd-Warshall Algorithm
+class Solution {
+public:
+    vector<bool> checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
+        vector<vector<bool>> reach(n,vector<bool>(n,false));
+        for(auto u : prerequisites)
+        {
+            reach[u[0]][u[1]] = true;
+        }
+        for(int k = 0;k<n;k++)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    reach[i][j] = reach[i][j] || (reach[i][k] &&  reach[k][j]);
+                }
+            }
+        }
+        vector<bool>ans;
+        for(auto u : queries)
+        {
+            ans.push_back(reach[u[0]][u[1]]);
+        }
+        return ans;
+    }
+};
