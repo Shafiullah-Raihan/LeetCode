@@ -1,0 +1,23 @@
+///https://leetcode.com/problems/longest-palindromic-subsequence/
+
+class Solution {
+public:
+
+    int lps(int i,int j,vector<vector<int>>& dp,string& s)
+    {
+        if(i>j) return 0;
+        if(i==j) return 1;
+        if(dp[i][j] != -1) return dp[i][j];
+        if(s[i] == s[j])
+        {
+            return dp[i][j] = 2+lps(i+1,j-1,dp,s);
+        }
+        return dp[i][j] = max(lps(i+1,j,dp,s),lps(i,j-1,dp,s));
+    }
+
+    int longestPalindromeSubseq(string s) {
+        int n= s.size();
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        return lps(0,n-1,dp,s);
+    }
+};
