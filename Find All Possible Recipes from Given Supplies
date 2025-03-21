@@ -1,0 +1,58 @@
+///https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/?envType=daily-question&envId=2025-03-21
+
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        unordered_set<string>availableSupplies;
+        unordered_map<string,int>recipieIndex;
+        for(int i=0;i<recipes.size();i++)
+        {
+            recipieIndex[recipes[i]]=i;
+        }
+        for(string supply: supplies)
+        {
+            availableSupplies.insert(supply);
+        }
+        unordered_map<string, vector<string>> dependencyGraph;
+        vector<int>inDegree(recipes.size(),0);
+        for(int i=0;i<recipes.size();i++)
+        {
+            for(string& ingredient: ingredients[i])
+            {
+                if(!availableSupplies.count(ingredient))
+                {
+                    dependencyGraph[ingredient].push_back(recipes[i]);
+                    inDegree[i]++;
+                }
+            }
+        }
+        queue<int>q;
+        for(int i=0;i<recipes.size();i++){
+            if(inDegree[i]==0) q.push(i);
+        }
+        vector<string>canCreate;
+        while(!q.empty())
+        {
+            int khabarIndex = q.front();
+            q.pop();
+            string banabe = recipes[khabarIndex];
+            canCreate.push_back(banabe);
+            if(!dependencyGraph.count(banabe))
+            {
+                continue;
+            }
+
+            for(string& u: dependencyGraph[banabe])
+            {
+                if(--inDegree[recipieIndex[u]] ==0)
+                {
+                    q.push(recipieIndex[u]);
+                }
+            }
+
+        }
+        return canCreate;
+
+
+    }
+};
